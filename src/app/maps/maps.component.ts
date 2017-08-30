@@ -21,15 +21,27 @@ export class MapsComponent implements OnInit {
   msgVal: string = '';
 
   constructor(public afAuth: AngularFireAuth, public af: AngularFireDatabase) {
-    this.items = af.list('/00:0a:f5:89:89:80', {
-      query: {
-        limitToLast: 50
-      }
+    let location = af.object('/F0:27:65:90:DC:87', { preserveSnapshot: false });
+    // console.log(location);
+     location.subscribe(snapshot => {
+      console.log(snapshot)
+      this.lat = snapshot.latitue;
+      this.lng = snapshot.longitude;
+      console.log(this);
+      // env.pregunta = snapshot[0];
+      // env.generarPreguntas();
+
     });
 
-    console.log(this.items);
+    // this.items = af.list('/00:0a:f5:89:89:80', {
+    //   query: {
+    //     limitToLast: 50
+    //   }
+    // });
 
-    this.user = this.afAuth.authState;
+    // console.log(this.items);
+
+    // this.user = this.afAuth.authState;
   }
 
   ngOnInit() {
