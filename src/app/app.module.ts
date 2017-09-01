@@ -14,6 +14,7 @@ import { LoginComponent } from './login/login.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { SingUpComponent } from './sing-up/sing-up.component';
 
 export const firebaseConfig = {
    apiKey: "AIzaSyBtFkGSyXTPl5I6oyF9YDm3njtvBrLatvg",
@@ -25,8 +26,9 @@ export const firebaseConfig = {
 };
 
 const appRoutes: Routes = [
-  { path: 'map', component: MapsComponent },
   { path: '', component: LoginComponent },
+  { path: 'sing-up', component: SingUpComponent },
+  { path: 'map', component: MapsComponent },
   // {
   //   path: 'heroes',
   //   component: HeroListComponent,
@@ -40,7 +42,7 @@ const appRoutes: Routes = [
     AppComponent,
     MapsComponent,
     LoginComponent,  
-    FooterComponent, HeaderComponent, NotfoundComponent
+    FooterComponent, HeaderComponent, NotfoundComponent, SingUpComponent
   ],
   imports: [
     BrowserModule,

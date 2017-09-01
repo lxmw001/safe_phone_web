@@ -27,4 +27,9 @@ export class LoginComponent implements OnInit {
 		}
 	}
 
+	goSingUp() {
+		console.log("go");
+		this.router.navigate(['sing-up']);
+	}
+
 }
