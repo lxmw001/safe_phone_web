@@ -5,7 +5,7 @@ export class User {
 
 	constructor() { }
 
-	setUserLoggedIn() {		
+	setUserLoggedIn() {
 		localStorage.setItem('logged', 'logged');
 	}
 
@@ -14,6 +14,6 @@ export class User {
 	}
 
 	isLoggedIn() {
-		return localStorage.getItem('logged');
+		return !!localStorage.getItem('logged');
 	}
 }

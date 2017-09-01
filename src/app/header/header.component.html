@@ -1,1 +1,11 @@
-<header>Safe Phone</header>
+<header *ngIf="!user.isLoggedIn()">Safe Phone</header>
+<!-- oooo -->
+<md-toolbar color="primary" *ngIf="user.isLoggedIn()">
+  <span>Safe Phone Web</span>
+  <span class="example-spacer"></span>
+  <button md-button [mdMenuTriggerFor]="appMenu"><md-icon>menu</md-icon> Menu</button>
+</md-toolbar>
+<md-menu #appMenu="mdMenu">
+  <button md-menu-item> Settings </button>
+  <button md-menu-item (click)="logout()"> Logout </button>
+</md-menu>

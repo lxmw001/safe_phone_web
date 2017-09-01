@@ -23,10 +23,10 @@ export class LoginComponent implements OnInit {
 		e.preventDefault();
 		var username = e.target.elements[0].value;
 		var password = e.target.elements[1].value;
-		
+
 		if(username === 'admin' && password === 'admin') {
 	  		this.user.setUserLoggedIn();
-			this.router.navigate(['map']);
+				this.router.navigate(['map']);
 		}
 	}
 

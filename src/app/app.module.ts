@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { MapsComponent } from './maps/maps.component';
-
-import { LocalStorageModule } from 'angular-2-local-storage';
 
 import { AgmCoreModule } from '@agm/core';
 import { AngularFireModule } from 'angularfire2';
@@ -17,6 +17,10 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { SingUpComponent } from './sing-up/sing-up.component';
+
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule} from '@angular/material';
+
 
 export const firebaseConfig = {
    apiKey: "AIzaSyBtFkGSyXTPl5I6oyF9YDm3njtvBrLatvg",
@@ -31,11 +35,6 @@ const appRoutes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'sing-up', component: SingUpComponent },
   { path: 'map', component: MapsComponent },
-  // {
-  //   path: 'heroes',
-  //   component: HeroListComponent,
-  //   data: { title: 'Heroes List' }
-  // }
   { path: '**', component: NotfoundComponent }
 ];
 
@@ -43,7 +42,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     MapsComponent,
-    LoginComponent,  
+    LoginComponent,
     FooterComponent, HeaderComponent, NotfoundComponent, SingUpComponent
   ],
   imports: [
@@ -58,10 +57,14 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    LocalStorageModule.withConfig({
-      prefix: 'safe-phone',
-      storageType: 'localStorage'
-    })
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpModule,
+    MdButtonModule,
+    MdCardModule,
+    MdMenuModule,
+    MdToolbarModule,
+    MdIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
