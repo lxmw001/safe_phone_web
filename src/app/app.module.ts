@@ -10,6 +10,10 @@ import { AngularFireModule } from 'angularfire2';
 // New imports to update based on AngularFire2 version 4
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { LoginComponent } from './login/login.component';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 export const firebaseConfig = {
    apiKey: "AIzaSyBtFkGSyXTPl5I6oyF9YDm3njtvBrLatvg",
@@ -22,18 +26,21 @@ export const firebaseConfig = {
 
 const appRoutes: Routes = [
   { path: 'map', component: MapsComponent },
+  { path: '', component: LoginComponent },
   // {
   //   path: 'heroes',
   //   component: HeroListComponent,
   //   data: { title: 'Heroes List' }
   // }
-  // { path: '**', component: PageNotFoundComponent }
+  { path: '**', component: NotfoundComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    MapsComponent
+    MapsComponent,
+    LoginComponent,  
+    FooterComponent, HeaderComponent, NotfoundComponent
   ],
   imports: [
     BrowserModule,
