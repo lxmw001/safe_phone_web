@@ -5,6 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { MapsComponent } from './maps/maps.component';
 
+import { LocalStorageModule } from 'angular-2-local-storage';
+
 import { AgmCoreModule } from '@agm/core';
 import { AngularFireModule } from 'angularfire2';
 // New imports to update based on AngularFire2 version 4
@@ -48,14 +50,18 @@ const appRoutes: Routes = [
     BrowserModule,
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      { enableTracing: false } // <-- debugging purposes only
     ),
      AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBGrD-ogbYlI3vfUdpFSLSHYfuefF7NetE'
     }),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    LocalStorageModule.withConfig({
+      prefix: 'safe-phone',
+      storageType: 'localStorage'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
