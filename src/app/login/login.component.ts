@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../domain-model/user';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 
 @Component({
@@ -11,7 +12,10 @@ import { User } from '../domain-model/user';
 })
 export class LoginComponent implements OnInit {
 
-	constructor(private router:Router, private user:User) { }
+	email: string = '';
+	password: string = '';
+
+	constructor(private router:Router, private user:User, public afAuth: AngularFireAuth) { }
 
 	ngOnInit() {
 		if(this.user.isLoggedIn()) {
@@ -19,15 +23,14 @@ export class LoginComponent implements OnInit {
 		}
 	}
 
-	loginUser(e) {
-		e.preventDefault();
-		var username = e.target.elements[0].value;
-		var password = e.target.elements[1].value;
+	loginUser() {
 
-		if(username === 'admin' && password === 'admin') {
-	  		this.user.setUserLoggedIn();
-				this.router.navigate(['map']);
-		}
+		this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password).then((response) => {
+			console.log(response);
+			this.user.setUserLoggedIn();
+			this.router.navigate(['map']);
+		});
+		
 	}
 
 }

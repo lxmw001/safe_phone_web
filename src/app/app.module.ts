@@ -36,6 +36,7 @@ const appRoutes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'sing-up', component: SingUpComponent },
   { path: 'map', component: MapsComponent },
+  { path: 'set-mac-address', component: SetMacDeviceComponent },
   { path: '**', component: NotfoundComponent }
 ];
 
@@ -43,7 +44,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     MapsComponent,
-    LoginComponent,  
+    LoginComponent,
     FooterComponent, HeaderComponent, NotfoundComponent, SingUpComponent, SetMacDeviceComponent
   ],
   imports: [

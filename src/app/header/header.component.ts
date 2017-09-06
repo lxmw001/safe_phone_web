@@ -17,9 +17,14 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-    logout() {
+  logout() {
     this.user.setLoggedOut();
     this.router.navigate(['']);
+  }
+
+  goSetMacAddress() {
+    console.log("aadfds");
+    this.router.navigate(['set-mac-address']);
   }
 
 }

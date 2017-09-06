@@ -1,20 +1,16 @@
 
-<form (submit)="registerUser($event)">
-	<div class="input">
-		<label>Username</label>
-		<input type="text">
-	</div>
+<form (submit)="registerUser()">	
 	<div class="input">
 		<label>E-mail</label>
-		<input type="email">
+		<input type="email" [(ngModel)]="email" name="email" required>
 	</div>
 	<div class="input">
 		<label>Password</label>
-		<input type="password">
+		<input type="password" [(ngModel)]="password" name="password" required>
 	</div>
 	<div class="input">
 		<label>Confirm Password</label>
-		<input type="password">
+		<input type="password" [(ngModel)]="cPassword" name="cPassword" required>
 	</div>
 	<div class="input">
 		<input type="submit" value="Sing Up">

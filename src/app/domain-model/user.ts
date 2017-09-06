@@ -1,7 +1,7 @@
 export class User {
 
 	email: string;
-	addresDevice: string;
+	macAddresDevice: string;
 
 	constructor() { }
 

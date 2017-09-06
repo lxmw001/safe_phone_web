@@ -6,6 +6,6 @@
   <button md-button [mdMenuTriggerFor]="appMenu"><md-icon>menu</md-icon> Menu</button>
 </md-toolbar>
 <md-menu #appMenu="mdMenu">
-  <button md-menu-item> Settings </button>
+  <button md-menu-item (click)="goSetMacAddress()"> Settings </button>
   <button md-menu-item (click)="logout()"> Logout </button>
 </md-menu>
