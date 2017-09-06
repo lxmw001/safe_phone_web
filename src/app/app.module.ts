@@ -17,6 +17,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { SingUpComponent } from './sing-up/sing-up.component';
+import { SetMacDeviceComponent } from './set-mac-device/set-mac-device.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule} from '@angular/material';
@@ -42,8 +43,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     MapsComponent,
-    LoginComponent,
-    FooterComponent, HeaderComponent, NotfoundComponent, SingUpComponent
+    LoginComponent,  
+    FooterComponent, HeaderComponent, NotfoundComponent, SingUpComponent, SetMacDeviceComponent
   ],
   imports: [
     BrowserModule,
