@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
 		this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password).then((response) => {
 			console.log(response);
 			this.user.setUserLoggedIn();
+			this.user.setUserId(response.uid);
 			this.router.navigate(['map']);
 		});
 		

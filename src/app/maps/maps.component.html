@@ -1,7 +1,19 @@
-<h1>{{ title }}</h1>
+<h1>Tracking</h1>
 
 <!-- this creates a google map on the page with the given lat/lng from -->
 <!-- the component as the initial center of the map: -->
-<agm-map [latitude]="lat" [longitude]="lng">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-</agm-map>
+<div *ngIf="alreadyMacAddressAssociate;else map">
+	Please set a mac addres on settings menu
+</div>
+
+<ng-template #map>
+	<agm-map 
+	[latitude]="latitude" 
+	[longitude]="longitude">
+		<agm-marker 
+		[latitude]="latitude" 
+		[longitude]="longitude"
+		[title]= "title">			
+		</agm-marker>
+	</agm-map>
+</ng-template>

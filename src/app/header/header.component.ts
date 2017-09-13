@@ -23,7 +23,6 @@ export class HeaderComponent implements OnInit {
   }
 
   goSetMacAddress() {
-    console.log("aadfds");
     this.router.navigate(['set-mac-address']);
   }
 

@@ -15,28 +15,32 @@ import { User } from '../domain-model/user';
 })
 export class MapsComponent implements OnInit {
 
-  title: string = 'My first AGM project';
-  lat: number = 0;
-  lng: number = 0;
+  title: string = '';
+  latitude: number = 0;
+  longitude: number = 0;
   date: Date = null;
+  alreadyMacAddressAssociate: boolean = true;
 
-  // user: Observable<firebase.User>;
-  items: FirebaseListObservable<any[]>;
   msgVal: string = '';
 
-  constructor(private router:Router, public afAuth: AngularFireAuth, public af: AngularFireDatabase, private user: User) {
-    let location = af.object('/F0:27:65:90:DC:87', { preserveSnapshot: false });
-    // console.log(location);
-     location.subscribe(snapshot => {
-      this.lat = snapshot.latitue;
-      this.lng = snapshot.longitude;
-    });
-
-
-    // this.user = this.afAuth.authState;
+  constructor(private router:Router, public afAuth: AngularFireAuth, public af: AngularFireDatabase, private user: User) {   
   }
 
   ngOnInit() {
+    this.loadMap();
+  }
+
+  loadMap() {
+    let macAddress = this.user.getMacAddresDevice();
+    if(!macAddress) return;
+    console.log(macAddress);
+    this.alreadyMacAddressAssociate = true;
+    let location = this.af.object('/deviceData/' + macAddress, { preserveSnapshot: false });
+    location.subscribe(snapshot => {
+      this.latitude = snapshot.latitue;
+      this.longitude = snapshot.longitude;
+      this.title = snapshot.date;
+    });
   }
 
 }
