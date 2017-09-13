@@ -20,10 +20,18 @@ export class MapsComponent implements OnInit {
   longitude: number = 0;
   date: Date = null;
   alreadyMacAddressAssociate: boolean = true;
+  days: any = [];
+  daysRoutes:any = [];
+  currentRoute: any = [];
+  selectedOption: string = '0';
+  selectedDay: string;
+  firstLoad: boolean = true;
+
+  suscriptionLocation: any;
 
   msgVal: string = '';
 
-  constructor(private router:Router, public afAuth: AngularFireAuth, public af: AngularFireDatabase, private user: User) {   
+  constructor(private router:Router, public afAuth: AngularFireAuth, public af: AngularFireDatabase, private user: User) {
   }
 
   ngOnInit() {
@@ -33,14 +41,38 @@ export class MapsComponent implements OnInit {
   loadMap() {
     let macAddress = this.user.getMacAddresDevice();
     if(!macAddress) return;
-    console.log(macAddress);
     this.alreadyMacAddressAssociate = true;
+    if(this.suscriptionLocation) this.suscriptionLocation.unsubscribe();
+
     let location = this.af.object('/deviceData/' + macAddress, { preserveSnapshot: false });
-    location.subscribe(snapshot => {
-      this.latitude = snapshot.latitue;
-      this.longitude = snapshot.longitude;
-      this.title = snapshot.date;
+    this.suscriptionLocation = location.subscribe(snapshot => {
+      if(this.selectedOption == '0') {
+        this.loadLastLocation(snapshot);
+        this.firstLoad = true;
+      } else if (this.selectedOption == '1' && this.firstLoad)  {
+        this.loadSelectedDay(snapshot.navigation);
+        this.firstLoad = false;
+      }
     });
   }
 
+  loadLastLocation(snapshot: any) {
+      this.latitude = snapshot.location.latitude;
+      this.longitude = snapshot.location.longitude;
+      this.title = snapshot.location.date;
+  }
+
+  loadSelectedDay(navigation: any) {
+    this.daysRoutes = navigation;
+    this.days = Object.keys(navigation);
+    this.selectedDay = this.days.length > 0 ? this.days[0] : '';
+    this.loadDailyRoute();
+  }
+
+  loadDailyRoute() {
+    let routes = this.daysRoutes[this.selectedDay];
+    for(let route in routes) {
+      this.currentRoute.push(routes[route]);
+    }
+  }
 }

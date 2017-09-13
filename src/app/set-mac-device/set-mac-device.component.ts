@@ -18,16 +18,17 @@ export class SetMacDeviceComponent implements OnInit {
 
 	constructor(public af: AngularFireDatabase, private user:User) { }
 
-	ngOnInit() {		
+	ngOnInit() {
 		this.verifyAssignedMacAddresToCurrentUser();
 	}
 
 	verifyAssignedMacAddresToCurrentUser() {
-		let userIdList = this.getUserIdList();		
+		let userIdList = this.getUserIdList();
 		this.suscriptionList = userIdList.subscribe(idsList => {
 			idsList.forEach(item => {
 				if(item.$key === this.user.getUserId()) {
 					this.macAddress = item.$value;
+					this.user.setMacAddresDevice(this.macAddress);
 					this.alreadyAssociated = true;
 				}
 			});
@@ -40,7 +41,7 @@ export class SetMacDeviceComponent implements OnInit {
 	}
 
 	verifyIfMacAddressExists() {
-		let usersUIDList = this.getUserIdList();	
+		let usersUIDList = this.getUserIdList();
 		this.suscriptionList = usersUIDList.subscribe(userList => {
 			let macAddressAsignedToUser = false;
 			userList.forEach(item => {
@@ -79,8 +80,8 @@ export class SetMacDeviceComponent implements OnInit {
 				console.log('no existe la direccion ingresada');
 			} else {
 				// agregar la direccion al usuario
-				
-			}			
+
+			}
 		});
 	}
 

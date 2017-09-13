@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
 
   userLogged : boolean = false;
 
-  constructor(private router:Router, private user:User) { }
+  constructor(private router:Router, public user:User) { }
 
   ngOnInit() {
   }
