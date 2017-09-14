@@ -71,6 +71,7 @@ export class MapsComponent implements OnInit {
 
   loadDailyRoute() {
     let routes = this.daysRoutes[this.selectedDay];
+    this.currentRoute = [];
     let i = 1
     for(let route in routes) {
       routes[route].num = i.toString();
