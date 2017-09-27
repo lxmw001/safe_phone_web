@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { AsyncLocalStorage } from 'angular-async-local-storage';
 
 @Component({
-  providers: [AsyncLocalStorage]
+	template: '',
+ 	providers: [AsyncLocalStorage]
 })
 
 export class User {

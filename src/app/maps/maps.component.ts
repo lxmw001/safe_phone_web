@@ -45,9 +45,7 @@ export class MapsComponent implements OnInit {
   loadMap() {    
     this.user.getMacAddresDevice().subscribe((data) => {
         if(data) {
-          console.log(data); 
           this.macAddress = data.toString();
-          console.log('mac addres',this.macAddress);
           this.alreadyMacAddressAssociate = true;
           if(this.suscriptionLocation) this.suscriptionLocation.unsubscribe();
 
