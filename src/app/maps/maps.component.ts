@@ -42,7 +42,7 @@ export class MapsComponent implements OnInit {
     this.loadMap();
   }
 
-  loadMap() {    
+  loadMap() {
     this.user.getMacAddresDevice().subscribe((data) => {
         if(data) {
           this.macAddress = data.toString();
@@ -62,7 +62,7 @@ export class MapsComponent implements OnInit {
           });
         }
       }
-    );      
+    );
   }
 
   loadLastLocation(snapshot: any) {
@@ -94,19 +94,19 @@ export class MapsComponent implements OnInit {
     // show spinner loading action
     reportAsLostRef.update({reportedAsLost: this.reportedAsLost}).then(
       () => {
-        // hide spinner        
+        // hide spinner
       });
   }
 
   ringPhone() {
     this.updateRingPhoneValue(true).then(() => {
-      setTimeout(function() {
+      setTimeout(() => {
         this.updateRingPhoneValue(false);
       }, 5000);
     });
   }
 
-  updateRingPhoneValue(toRing: boolean) {    
+  updateRingPhoneValue(toRing: boolean) {
     let reportAsLostRef = this.af.object('/deviceData/' + this.macAddress + '/manageActions');
     // show spinner loading action
     return reportAsLostRef.update({toRing: toRing});

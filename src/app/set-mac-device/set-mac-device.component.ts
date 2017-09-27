@@ -29,7 +29,6 @@ export class SetMacDeviceComponent implements OnInit {
 				if(item.$key === this.user.getUserId()) {
 					this.macAddress = item.$value;
 					this.user.setMacAddresDevice(this.macAddress).subscribe(() => {
-						console.log(this.macAddress);
 				    	successCallback();
 				    });
 					this.alreadyAssociated = true;
