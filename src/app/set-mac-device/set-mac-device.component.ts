@@ -19,16 +19,19 @@ export class SetMacDeviceComponent implements OnInit {
 	constructor(public af: AngularFireDatabase, private user:User) { }
 
 	ngOnInit() {
-		this.verifyAssignedMacAddresToCurrentUser();
+		this.verifyAssignedMacAddresToCurrentUser(null);
 	}
 
-	verifyAssignedMacAddresToCurrentUser() {
+	verifyAssignedMacAddresToCurrentUser(successCallback) {
 		let userIdList = this.getUserIdList();
 		this.suscriptionList = userIdList.subscribe(idsList => {
 			idsList.forEach(item => {
 				if(item.$key === this.user.getUserId()) {
 					this.macAddress = item.$value;
-					this.user.setMacAddresDevice(this.macAddress);
+					this.user.setMacAddresDevice(this.macAddress).subscribe(() => {
+						console.log(this.macAddress);
+				    	successCallback();
+				    });
 					this.alreadyAssociated = true;
 				}
 			});

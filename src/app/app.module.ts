@@ -21,6 +21,7 @@ import { SetMacDeviceComponent } from './set-mac-device/set-mac-device.component
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule} from '@angular/material';
+import { AsyncLocalStorageModule } from 'angular-async-local-storage';
 
 
 export const firebaseConfig = {
@@ -66,7 +67,8 @@ const appRoutes: Routes = [
     MdCardModule,
     MdMenuModule,
     MdToolbarModule,
-    MdIconModule
+    MdIconModule,
+    AsyncLocalStorageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

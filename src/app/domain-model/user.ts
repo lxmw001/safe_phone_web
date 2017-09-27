@@ -1,10 +1,17 @@
+import { Component } from '@angular/core';
+import { AsyncLocalStorage } from 'angular-async-local-storage';
+
+@Component({
+  providers: [AsyncLocalStorage]
+})
+
 export class User {
 
 	id: string;
 	email: string;
 	macAddresDevice: string;
 
-	constructor() { }
+	public constructor(protected storage: AsyncLocalStorage) {}
 
 	setUserLoggedIn() {
 		localStorage.setItem('logged', 'logged');
@@ -27,10 +34,10 @@ export class User {
 	}
 
 	setMacAddresDevice(macAddress: string) {
-		localStorage.setItem('macAddress', macAddress);
+		return this.storage.setItem('macAddress', macAddress);
 	}
 
 	getMacAddresDevice() {
-		return localStorage.getItem('macAddress');
+		return this.storage.getItem('macAddress');
 	}
 }

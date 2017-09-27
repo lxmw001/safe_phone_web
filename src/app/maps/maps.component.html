@@ -4,7 +4,9 @@
 <!-- the component as the initial center of the map: -->
 <div *ngIf="alreadyMacAddressAssociate;else map">
 	<div class="actions">
+		<label>Report as Lost: </label>
 		<input type="checkbox" name="reportedAsLost" [(ngModel)]="reportedAsLost" (ngModelChange)="reportLostPhone()">
+		<br>
 		<button (click)="ringPhone()">Ring Phone</button>
 	</div>
 	<br>

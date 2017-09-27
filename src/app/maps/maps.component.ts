@@ -33,6 +33,8 @@ export class MapsComponent implements OnInit {
 
   reportedAsLost: boolean  = false;
 
+  macAddress: string;
+
   constructor(private router:Router, public afAuth: AngularFireAuth, public af: AngularFireDatabase, private user: User) {
   }
 
@@ -40,23 +42,29 @@ export class MapsComponent implements OnInit {
     this.loadMap();
   }
 
-  loadMap() {
-    let macAddress = this.user.getMacAddresDevice();
-    if(!macAddress) return;
-    this.alreadyMacAddressAssociate = true;
-    if(this.suscriptionLocation) this.suscriptionLocation.unsubscribe();
+  loadMap() {    
+    this.user.getMacAddresDevice().subscribe((data) => {
+        if(data) {
+          console.log(data); 
+          this.macAddress = data.toString();
+          console.log('mac addres',this.macAddress);
+          this.alreadyMacAddressAssociate = true;
+          if(this.suscriptionLocation) this.suscriptionLocation.unsubscribe();
 
-    let location = this.af.object('/deviceData/' + macAddress, { preserveSnapshot: false });
-    this.suscriptionLocation = location.subscribe(snapshot => {
-      this.reportedAsLost = snapshot.manageActions.reportedAsLost;
-      if(this.selectedOption == '0') {
-        this.loadLastLocation(snapshot);
-        this.firstLoad = true;
-      } else if (this.selectedOption == '1' && this.firstLoad)  {
-        this.loadSelectedDay(snapshot.navigation);
-        this.firstLoad = false;
+          let location = this.af.object('/deviceData/' + this.macAddress, { preserveSnapshot: false });
+          this.suscriptionLocation = location.subscribe(snapshot => {
+            this.reportedAsLost = snapshot.manageActions.reportedAsLost;
+            if(this.selectedOption == '0') {
+              this.loadLastLocation(snapshot);
+              this.firstLoad = true;
+            } else if (this.selectedOption == '1' && this.firstLoad)  {
+              this.loadSelectedDay(snapshot.navigation);
+              this.firstLoad = false;
+            }
+          });
+        }
       }
-    });
+    );      
   }
 
   loadLastLocation(snapshot: any) {
@@ -84,28 +92,26 @@ export class MapsComponent implements OnInit {
   }
 
   reportLostPhone() {
-    let macAddress = this.user.getMacAddresDevice();
-    let reportAsLostRef = this.af.object('/deviceData/' + macAddress + '/manageActions');
+    let reportAsLostRef = this.af.object('/deviceData/' + this.macAddress + '/manageActions');
     // show spinner loading action
     reportAsLostRef.update({reportedAsLost: this.reportedAsLost}).then(
-      function() {
+      () => {
         // hide spinner        
       });
   }
 
   ringPhone() {
-    let self = this;
-    this.updateRingPhoneValue(true).then(function() {
+    this.updateRingPhoneValue(true).then(() => {
       setTimeout(function() {
-        self.updateRingPhoneValue(false);
+        this.updateRingPhoneValue(false);
       }, 5000);
     });
   }
 
-  updateRingPhoneValue(toRing: boolean) {
-    let macAddress = this.user.getMacAddresDevice();
-    let reportAsLostRef = this.af.object('/deviceData/' + macAddress + '/manageActions');
+  updateRingPhoneValue(toRing: boolean) {    
+    let reportAsLostRef = this.af.object('/deviceData/' + this.macAddress + '/manageActions');
     // show spinner loading action
     return reportAsLostRef.update({toRing: toRing});
   }
 }
+
