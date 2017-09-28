@@ -53,6 +53,7 @@ export class MapsComponent implements OnInit {
           this.suscriptionLocation = location.subscribe(snapshot => {
             this.reportedAsLost = snapshot.manageActions.reportedAsLost;
             if(this.selectedOption == '0') {
+              if(!snapshot.location) return;
               this.loadLastLocation(snapshot);
               this.firstLoad = true;
             } else if (this.selectedOption == '1' && this.firstLoad)  {
